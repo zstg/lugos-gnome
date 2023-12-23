@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# this script is intended to be run from the `lugOS-2401` directory.
+
+# echo "Copying pacman-init.service"
+# cp ${script_path}/pacman-init.service ${work_dir}/${arch}/airootfs/etc/systemd/system/
+
+# Set Autologin enabled
+sed -i 's/--autologin/--autologin lug/g' ./airootfs/etc/systemd/system/getty@tty1.service.d/autologin.conf
+
+
+ln -sf airootfs/usr/lib/systemd/system/gdm.service airootfs/etc/systemd/system/display-manager.service
+ln -sf airootfs/usr/lib/systemd/system/gdm.service airootfs/usr/lib/systemd/system/display-manager.service
+ln -sf airootfs/usr/lib/systemd/system/NetworkManager.service airootfs/etc/systemd/system/NetworkManager.service
+
+#Copy Arch Mirrorlist
+echo "Setting up Arch Mirrorlist"
+mkdir -p releng/airootfs/etc/pacman.d
+sudo mkarchiso -v -w ./output/ -o ./output/ releng/
+
+
+- locale.gen file
+- sudo group
