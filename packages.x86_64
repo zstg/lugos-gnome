@@ -106,7 +106,7 @@ wireless_tools
 wpa_supplicant
 xorg
 xorg-server
-# xorg-init
+xorg-xinit
 xorg-xrandr
 yay-bin
 zsh

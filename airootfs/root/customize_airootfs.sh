@@ -14,17 +14,20 @@ locale-gen
 pacman-key --init
 pacman-key --populate
 
-usermod -aG wheel,input,video,audio,kvm xundaoxd
+grub-mkconfig -o /boot/grub/grub.cfg
+# rm -f /etc/systemd/system/getty@tty1.service.d/autologin.conf
+usermod -aG wheel,input,video,audio,kvm stig
 sed -E -i '/^#\s*%wheel.*NOPASSWD/{s/^#\s*//}' /etc/sudoers
 
 systemctl enable NetworkManager
-systemctl enable sddm
+systemctl enable gdm
 systemctl enable sshd
 systemctl enable bluetooth
 ln -s /usr/lib/systemd/system/gdm.service /etc/systemd/system/display-manager.service
-
+usermod -aG audio,network,optical,rfkill,storage,power,input,wheel lug
 groupadd -r autologin
 gpasswd -a lug autologin
+systemctl set-default graphical.target
 # systemctl enable libvirtd
 # sed -i 's/^#unix_sock_group/unix_sock_group/;s/^#unix_sock_rw_perms/unix_sock_rw_perms/' /etc/libvirt/libvirtd.conf
-# usermod -aG libvirt xundaoxd
+# usermod -aG libvirt lug
