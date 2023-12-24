@@ -1,0 +1,8 @@
+root:x:0:root
+adm:x:4:lug
+wheel:x:10:lug
+uucp:x:14:lug
+nopasswdlogin:x:966:lug
+rfkill:x:983:lug
+sys:x:3:bin,lug
+lug:x:1000:lug
